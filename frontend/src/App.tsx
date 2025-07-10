@@ -2,24 +2,25 @@ import {useState} from 'react';
 import logo from './assets/images/logo-universal.png';
 import './App.css';
 import {Greet} from "../wailsjs/go/main/App";
-import { Button } from "@chakra-ui/react"
+import { Button, Text, Heading, HStack } from "@chakra-ui/react"
 
 
 function App() {
-    const [resultText, setResultText] = useState("Please enter your name below 👇");
-    const [name, setName] = useState('');
-    const updateName = (e: any) => setName(e.target.value);
-    const updateResultText = (result: string) => setResultText(result);
-
-    function greet() {
-        Greet(name).then(updateResultText);
+    function greet(i: Number) {
+        Greet(`${i}`);
     }
 
     return (
         <div id="App">
-            <Button>Click me</Button>
-            <Button>Click me</Button>
-            <Button>Click me</Button>
+            <Heading as="h1">zk-BAN</Heading>
+            <Text>Choose the pseudonym:</Text>
+
+            <br />
+            <HStack justify='center' gap="6">
+                <Button onClick={() => {greet(1)} }>Taro</Button>
+                <Button onClick={() => {greet(2)}}>Jiro</Button>
+                <Button onClick={() => {greet(3)}}>Saburo</Button>
+            </HStack>
         </div>
     )
 }

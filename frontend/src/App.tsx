@@ -1,15 +1,8 @@
-import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
 import './App.css';
-import {Greet} from "../wailsjs/go/main/App";
+import { Sign } from "../wailsjs/go/main/App";
 import { Button, Text, Heading, HStack } from "@chakra-ui/react"
 
-
 function App() {
-    function greet(i: Number) {
-        Greet(`${i}`);
-    }
-
     return (
         <div id="App">
             <Heading as="h1">zk-BAN</Heading>
@@ -17,9 +10,9 @@ function App() {
 
             <br />
             <HStack justify='center' gap="6">
-                <Button onClick={() => {greet(1)} }>Taro</Button>
-                <Button onClick={() => {greet(2)}}>Jiro</Button>
-                <Button onClick={() => {greet(3)}}>Saburo</Button>
+                <Button onClick={() => {Sign(1)} }>Taro</Button>
+                <Button onClick={() => {Sign(2)}}>Jiro</Button>
+                <Button onClick={() => {Sign(3)}}>Saburo</Button>
             </HStack>
         </div>
     )

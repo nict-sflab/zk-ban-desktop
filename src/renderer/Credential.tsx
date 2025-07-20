@@ -1,6 +1,6 @@
 import { useZxing } from 'react-zxing'
 import { useState } from "react";
-import { Button } from "@chakra-ui/react"
+import { Heading, Text } from "@chakra-ui/react"
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function CredentialLoadPage() {
@@ -16,8 +16,11 @@ export default function CredentialLoadPage() {
     
   return (
     <div id="App">
-      <Button>Hello</Button>
-      <video ref={ref} />
+        <Heading as="h1">zk-BAN</Heading>
+        <Text>Scan your credential:</Text>
+
+        <br />
+        <video ref={ref}/>
     </div>
   )
 }

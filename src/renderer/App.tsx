@@ -1,16 +1,18 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
 import './App.css';
 import Setup from './Setup';
 import Sign from './Sign';
+import ProverRoute from './ProveKit';
+
+const route = {
+  Setup: Setup,
+  Sign: Sign,
+}
 
 export default function App() {
   return (
     <Router>
-      <Routes>
-        {/* <Route path="/" element={<Setup />} /> */}
-        <Route path="/" element={<Sign />} />
-      </Routes>
-    </Router>
+      <ProverRoute proverUI={route}></ProverRoute>
+     </Router>
   );
 }

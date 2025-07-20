@@ -1,9 +1,9 @@
-import { ElectronHandler } from '../main/preload';
+import Prover from '../main/proverkit';
 
 declare global {
   // eslint-disable-next-line no-unused-vars
   interface Window {
-    electron: ElectronHandler;
+    proverkit: Prover;
   }
 }
 

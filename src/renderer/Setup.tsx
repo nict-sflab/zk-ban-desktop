@@ -1,22 +1,37 @@
 import { useZxing } from 'react-zxing'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ProverKit from '../main/proverkit';
+import ProverKitInstance from '../main/instance';
 import { Heading, Text } from "@chakra-ui/react"
 
 
 export default function Setup() {
-  const [result, setResult] = useState("");
+  const [name, setName] = useState("");
 
   const { ref } = useZxing({
-    onDecodeResult(result) {
-      alert("QR Code Scanned!");
-      const text = result.getText()
-      console.log(text)
+    onDecodeResult(qr) {
+      try {
+        const text = qr.getText()
+        console.log(text)
+
+        const result = window.proverkit.Setup(text);
+        console.log(result)
+
+        alert("QR Code Scanned!");
+      } catch (e : any) {
+        alert(`Error decoding QR code:${e.message}`);
+      }
     },
+  })
+
+  useEffect(() => {
+    const n = window.proverkit.Name();
+    setName(n);
   })
     
   return (
     <div id="App">
-        <Heading as="h1">zk-BAN</Heading>
+        <Heading as="h1">{name}</Heading>
         <Text>Scan your credential:</Text>
 
         <br />

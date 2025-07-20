@@ -1,5 +1,5 @@
 import Prover from './proverkit';
 
-let ProverInstance : Prover = null as any;
+let ProverInstance = null as any;
 
 export default {ProverInstance};

@@ -14,7 +14,7 @@ export default function Setup() {
         const text = qr.getText()
         console.log(text)
 
-        const result = window.proverkit.Setup(text);
+        const result = window.proverkit.Setup({Input: () => text});
         console.log(result)
 
         alert("QR Code Scanned!");

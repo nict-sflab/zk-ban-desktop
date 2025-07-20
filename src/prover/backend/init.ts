@@ -2,7 +2,7 @@ import { contextBridge } from 'electron';
 import Prover from './proverkit';
 import ProverInstance from './instance';
 
-const InitProverBridge = (prover: Prover) => {
+const InitProverBridge = <T1, T2>(prover: Prover<T1, T2>) => {
   ProverInstance.ProverInstance = prover;
 
   contextBridge.exposeInMainWorld('proverkit', {

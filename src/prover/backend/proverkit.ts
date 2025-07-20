@@ -1,6 +1,8 @@
-export default interface Prover {
+import { SetupInput, SignInput } from "./io";
+
+export default interface Prover<SetupOutput, SignOutput> {
   Name(): string;
-  Setup(signer: string): string;
-  Sign(option: any): string;
+  Setup(signer: SetupInput): SetupOutput;
+  Sign(option: SignInput): SignOutput;
 }
 

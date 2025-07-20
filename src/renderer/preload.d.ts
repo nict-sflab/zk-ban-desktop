@@ -1,4 +1,4 @@
-import Prover from '../main/proverkit';
+import Prover from '../prover/backend/proverkit';
 
 declare global {
   // eslint-disable-next-line no-unused-vars

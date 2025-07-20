@@ -1,7 +1,7 @@
 import { useZxing } from 'react-zxing'
 import { useEffect, useState } from "react";
-import ProverKit from '../main/proverkit';
-import ProverKitInstance from '../main/instance';
+import ProverKit from '../backend/proverkit';
+import ProverKitInstance from '../backend/instance';
 import { Heading, Text } from "@chakra-ui/react"
 
 

@@ -1,9 +1,9 @@
 import { useZxing } from 'react-zxing'
 import { useState } from "react";
 import { Heading, Text } from "@chakra-ui/react"
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 
-export default function CredentialLoadPage() {
+
+export default function Setup() {
   const [result, setResult] = useState("");
 
   const { ref } = useZxing({

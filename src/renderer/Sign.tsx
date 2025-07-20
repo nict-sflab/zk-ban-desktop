@@ -1,6 +1,4 @@
 
-import './App.css';
-
 import { Button, Text, Heading, HStack } from "@chakra-ui/react"
 
 function Sign(a: any) {}

@@ -2,17 +2,17 @@
 /* eslint no-unused-vars: off */
 import InitProverKit from '../prover/backend/init';
 import Prover from '../prover/backend/proverkit';
-
-import {SetupInput, SignInput} from '../prover/backend/io';
+import { contextBridge } from 'electron';
 
 const prover = {
   Name: () => "proverkit",
-  Setup: (signer: SetupInput) => {
-    console.log("Setup with options:", signer.Input());
+  Setup: (url: string, option: any) => {
+    console.log("Setup with params:", url, option);
     return "Prover setup completed.";
   },
-  Sign: (signInput: SignInput) => {
-    console.log("Signing with options:", signInput.URL());
+  Sign: (option: any) => {
+    const url = process.env.PROVER_KIT_SIGN_URL || "";
+    console.log("Signing with params:", url, option);
     return "Prover sign completed.";
   }
 };

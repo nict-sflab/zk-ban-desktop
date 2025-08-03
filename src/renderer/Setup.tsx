@@ -1,7 +1,7 @@
 import { useZxing } from 'react-zxing'
 import { useEffect, useState } from "react";
-import ProverKit from '../backend/proverkit';
-import ProverKitInstance from '../backend/instance';
+import ProverKit from '../prover/backend/proverkit';
+import ProverKitInstance from '../prover/backend/instance';
 import { Heading, Text } from "@chakra-ui/react"
 
 
@@ -14,7 +14,7 @@ export default function Setup() {
         const text = qr.getText()
         console.log(text)
 
-        const result = window.proverkit.Setup({Input: () => text});
+        const result = window.proverkit.Setup(text, {});
         console.log(result)
 
         alert("QR Code Scanned!");

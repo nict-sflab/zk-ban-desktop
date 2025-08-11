@@ -2,6 +2,16 @@
 import { Button, Text, Heading, HStack } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 
+
+const sign = (pseudonym: number, window: Window) => {
+    try {
+        window.proverkit.sign(pseudonym);
+        alert("done");
+    } catch (e: any) {
+        alert(`Error signing: ${e.message}`);
+    }
+}
+
 export default function SignPage() {
     const [name, setName] = useState("");
     useEffect(() => {
@@ -18,9 +28,9 @@ export default function SignPage() {
 
           <br />
           <HStack justify='center' gap="6">
-              <Button onClick={ () => {window.proverkit.sign(1)} }>Taro</Button>
-              <Button onClick={ () => {window.proverkit.sign(2)} }>Jiro</Button>
-              <Button onClick={ () => {window.proverkit.sign(3)} }>Saburo</Button>
+              <Button onClick={ async () => { sign(1, window); }}>Taro</Button>
+              <Button onClick={ async () => { sign(2, window); }}>Jiro</Button>
+              <Button onClick={ async () => { sign(3, window); }}>Saburo</Button>
           </HStack>
       </div>
     )

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=zk-BAN Desktop
+Comment=zk-BAN Signing App
+Type=Application
+Exec=/home/akakou/Documents/zk-ban-desktop/desktop/run.sh %u
+Terminal=true
+NoDisplay=true
+MimeType=x-scheme-handler/zk-ban;
+Path=/home/akakou/Documents/zk-ban-desktop
+

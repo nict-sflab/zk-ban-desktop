@@ -2,11 +2,12 @@ import { promises as fsp } from "fs";
 import { spawn } from "child_process";
 import axios from "axios";
 
+const ZK_BAN_SIGNER = "../zk-ban-system/example/signer/signer"
 const env = {
-  URL: process.env.PROVER_KIT_SIGN_URL || "",
-  MESSAGE: process.env.PROVER_KIT_MESSAGE || "",
-  COUNT: process.env.PROVER_KIT_COUNT || "0",
+  URL: process.env.ZK_BAN_URL || "",
 };
+
+
 
 function run(cmd: string, args: string[]) {
   return new Promise<{ code: number, stdout: string, stderr: string }>((resolve, reject) => {
@@ -27,13 +28,6 @@ export const prover = {
         return new Uint8Array([...atob(data)].map(s => s.charCodeAt(0)));
     }
 
-    const { code, stdout, stderr } = await run("../zk-ban-system/example/signer/signer", [
-      "update", 
-      "--message", env.MESSAGE,
-      "--count", env.COUNT,
-      "--url", env.URL,
-    ]);
-
     console.log("Setup with params:", signer, option);
     await fsp.writeFile("signer.json", signer, "utf-8");
 
@@ -50,14 +44,17 @@ export const prover = {
   },
 
   async Sign(option: any) {
+    console.log('zk-ban url', env.URL)
+    const searchParams = new URLSearchParams(env.URL);
+
     const args = [
       "sign", 
-      "--message", env.MESSAGE || "hello",
+      "--message", searchParams.get("message") || "hello",
       "--count", option,
-      "--url", env.URL || "http://localhost:8000/verify",
+      "--url", searchParams.get("callback") || "http://localhost:8000/verify",
     ]
 
-    const { code, stdout, stderr } = await run("../zk-ban-system/example/signer/signer", args);
+    const { code, stdout, stderr } = await run(ZK_BAN_SIGNER, args);
 
 
     console.log("Signing result:", { args, code, stdout, stderr });

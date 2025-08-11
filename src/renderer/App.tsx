@@ -7,8 +7,8 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Setup />} />
-        <Route path="/sgin" element={<Sign />} />
+        {/* <Route path="/" element={<Setup />} /> */}
+        <Route path="/" element={<Sign />} />
       </Routes>
      </Router>
   );

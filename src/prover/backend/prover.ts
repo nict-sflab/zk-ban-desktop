@@ -1,5 +1,6 @@
 import { promises as fsp } from "fs";
 import { spawn } from "child_process";
+import axios from "axios";
 
 const env = {
   URL: process.env.PROVER_KIT_SIGN_URL || "",
@@ -22,6 +23,10 @@ export const prover = {
   Name() { return "proverkit"; },
 
   async Setup(signer: string, option: any) {
+    const base64decode = (data:string) => {
+        return new Uint8Array([...atob(data)].map(s => s.charCodeAt(0)));
+    }
+
     const { code, stdout, stderr } = await run("../zk-ban-system/example/signer/signer", [
       "update", 
       "--message", env.MESSAGE,
@@ -31,17 +36,31 @@ export const prover = {
 
     console.log("Setup with params:", signer, option);
     await fsp.writeFile("signer.json", signer, "utf-8");
+
+    const resp = await axios.get('http://localhost:8080/group-public-key')
+    if (resp.status !== 200) {
+        throw new Error(`Failed to fetch group public key: ${resp.statusText}`);
+    }
+
+    const gpk = base64decode(resp.data);
+    await fsp.writeFile("gpk.bin", gpk, "utf-8");
+
+
     return "Prover setup completed.";
   },
 
   async Sign(option: any) {
-    const { code, stdout, stderr } = await run("../zk-ban-system/example/signer/signer", [
+    const args = [
       "sign", 
-      "--message", env.MESSAGE,
+      "--message", env.MESSAGE || "hello",
       "--count", option,
-      "--url", env.URL,
-    ]);
-    console.log("Signing result:", { code, stdout, stderr });
+      "--url", env.URL || "http://localhost:8000/verify",
+    ]
+
+    const { code, stdout, stderr } = await run("../zk-ban-system/example/signer/signer", args);
+
+
+    console.log("Signing result:", { args, code, stdout, stderr });
     if (code !== 0) throw new Error(`sign failed: ${stderr || stdout}`);
     return "Prover sign completed.";
   },

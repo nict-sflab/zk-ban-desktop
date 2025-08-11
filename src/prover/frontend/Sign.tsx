@@ -1,13 +1,14 @@
 
 import { Button, Text, Heading, HStack } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
-import { SignInput } from "../backend/io";
 
 export default function SignPage() {
     const [name, setName] = useState("");
     useEffect(() => {
-        const n = window.proverkit.Name();
-        setName(n);
+        (async function() {
+            const n = await window.proverkit.name();
+            setName(n);
+        })()
     }, []);
 
     return (
@@ -17,9 +18,9 @@ export default function SignPage() {
 
           <br />
           <HStack justify='center' gap="6">
-              <Button onClick={ () => {window.proverkit.Sign("https://example.com", 1)} }>Taro</Button>
-              <Button onClick={ () => {window.proverkit.Sign("https://example.com", 2)} }>Jiro</Button>
-              <Button onClick={ () => {window.proverkit.Sign( "https://example.com", 3)} }>Saburo</Button>
+              <Button onClick={ () => {window.proverkit.sign(1)} }>Taro</Button>
+              <Button onClick={ () => {window.proverkit.sign(2)} }>Jiro</Button>
+              <Button onClick={ () => {window.proverkit.sign(3)} }>Saburo</Button>
           </HStack>
       </div>
     )

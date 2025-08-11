@@ -13,6 +13,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { resolveHtmlPath } from './util';
+import { prover } from "../prover/backend/prover";
 
 class AppUpdater {
   constructor() {
@@ -126,3 +127,17 @@ app
     });
   })
   .catch(console.log);
+
+
+
+app.whenReady().then(createWindow);
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
+});
+
+ipcMain.handle("prover:name", () => prover.Name());
+ipcMain.handle("prover:setup", (_e, signer: string, option: any) => prover.Setup(signer, option));
+ipcMain.handle("prover:sign", (_e, option: any) => prover.Sign(option));
+ipcMain.handle("prover:update", (_e, option: any) => prover.Update(option));
+require('electron-debug').default();

@@ -8,7 +8,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Setup />} />
-        <Route path="/sign" element={<Sign />} />
+        <Route path="/sgin" element={<Sign />} />
       </Routes>
      </Router>
   );

@@ -1,7 +1,5 @@
 import { useZxing } from 'react-zxing'
 import { useEffect, useState } from "react";
-import ProverKit from '../prover/backend/proverkit';
-import ProverKitInstance from '../prover/backend/instance';
 import { Heading, Text } from "@chakra-ui/react"
 
 
@@ -14,7 +12,7 @@ export default function Setup() {
         const text = qr.getText()
         console.log(text)
 
-        const result = window.proverkit.Setup(text, {});
+        const result = window.proverkit.setup(text, {});
         console.log(result)
 
         alert("QR Code Scanned!");
@@ -25,8 +23,10 @@ export default function Setup() {
   })
 
   useEffect(() => {
-    const n = window.proverkit.Name();
-    setName(n);
+    (async function(){
+      const n = await window.proverkit.name();
+      setName(n);
+    })()
   })
     
   return (

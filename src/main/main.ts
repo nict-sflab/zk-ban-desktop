@@ -14,6 +14,14 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { resolveHtmlPath } from './util';
 import { prover } from "../prover/backend/prover";
+import fs from 'fs';
+
+function fileExistsSync(fileName: string): boolean {
+  const filePath = path.resolve(__dirname, '../../'+fileName);
+  console.log('filepath',filePath)
+  return fs.existsSync(filePath);
+}
+
 
 class AppUpdater {
   constructor() {
@@ -76,7 +84,11 @@ const createWindow = async () => {
     },
   });
 
-  mainWindow.loadURL(resolveHtmlPath('/index.html'));
+  const exists = fileExistsSync('./signer.json');
+  console.log("signer.json exists:", exists);
+  const hash = exists ? 'sign' : 'setup';
+
+  mainWindow.loadURL(resolveHtmlPath('/') + '#' + hash);
 
   mainWindow.on('ready-to-show', () => {
     if (!mainWindow) {

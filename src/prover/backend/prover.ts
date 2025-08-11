@@ -36,6 +36,8 @@ export const prover = {
         throw new Error(`Failed to fetch group public key: ${resp.statusText}`);
     }
 
+    console.log("Fetched group public key:", resp.data);
+    
     const gpk = base64decode(resp.data);
     await fsp.writeFile("gpk.bin", gpk, "utf-8");
 

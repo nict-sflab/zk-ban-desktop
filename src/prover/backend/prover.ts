@@ -24,9 +24,20 @@ export const prover = {
   Name() { return "proverkit"; },
 
   async Setup(signer: string, option: any) {
-    const base64decode = (data:string) => {
-        return new Uint8Array([...atob(data)].map(s => s.charCodeAt(0)));
-    }
+    const base64decode = (data: string) => {
+      const cleaned = data
+          .replace(/^data:.*?base64,/, '')
+          .replace(/[\r\n\s]/g, '')
+          .replace(/-/g, '+')
+          .replace(/_/g, '/');             
+
+      const padded = cleaned + '='.repeat((4 - cleaned.length % 4) % 4);
+
+      return new Uint8Array(
+          [...atob(padded)].map(s => s.charCodeAt(0))
+      );
+    };
+
 
     console.log("Setup with params:", signer, option);
     await fsp.writeFile("signer.json", signer, "utf-8");

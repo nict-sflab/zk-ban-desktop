@@ -2,9 +2,10 @@ import { promises as fsp } from "fs";
 import { spawn } from "child_process";
 import axios from "axios";
 
-const ZK_BAN_SIGNER = "../zk-ban-system/example/signer/signer"
 const env = {
   URL: process.env.ZK_BAN_URL || "",
+  SIGNER : process.env.ZK_BAN_SIGNER || "",
+  VERIFIER : process.env.ZK_BAN_VERIFIER_URL || "",
 };
 
 
@@ -64,11 +65,12 @@ export const prover = {
       "sign", 
       "--message", searchParams.get("message") || "hello",
       "--count", option,
-      "--url", searchParams.get("callback") || "http://localhost:8000/verify",
+      "--url", env.VERIFIER,
     ]
 
-    const { code, stdout, stderr } = await run(ZK_BAN_SIGNER, args);
+    console.log('signer command', env.SIGNER, args)
 
+    const { code, stdout, stderr } = await run(env.SIGNER, args);
 
     console.log("Signing result:", { args, code, stdout, stderr });
     if (code !== 0) throw new Error(`sign failed: ${stderr || stdout}`);

@@ -12,11 +12,14 @@ We test this app in NixOS with Gnome Desktop.
 ## How to install
 
 ```
+# edit config
+vim env.sh 
+
 cd ./desktop
 sh install.sh
 ```
 
-## Getting Started
+## Demo
 
 We can play demo with following commands:
 

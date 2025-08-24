@@ -16,7 +16,7 @@ cd ./desktop
 sh install.sh
 ```
 
-## Getting Started
+## Demo
 
 We can play demo with following commands:
 

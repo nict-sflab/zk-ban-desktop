@@ -41,7 +41,8 @@ export const prover = {
 
 
     console.log("Setup with params:", signer, option);
-    await fsp.writeFile("signer.json", signer, "utf-8");
+    const signerBin = base64decode(signer)
+    await fsp.writeFile("signer.gob", signerBin, "utf-8");
 
     const resp = await axios.get('http://localhost:8080/group-public-key')
     if (resp.status !== 200) {
@@ -60,6 +61,8 @@ export const prover = {
   async Sign(option: any) {
     console.log('zk-ban url', env.URL)
     const searchParams = new URLSearchParams(env.URL);
+    let cwd = process.cwd();
+    console.log("current directry", cwd);
 
     const args = [
       "sign", 

@@ -173,4 +173,4 @@ vite.config.ts.timestamp-*
 
 release
 gpk.bin
-signer.json
+signer.gob

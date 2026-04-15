@@ -84,8 +84,8 @@ const createWindow = async () => {
     },
   });
 
-  const exists = fileExistsSync('./signer.json');
-  console.log("signer.json exists:", exists);
+  const exists = fileExistsSync('./signer.gob');
+  console.log("signer.gob exists:", exists);
   const hash = exists ? 'sign' : 'setup';
 
   mainWindow.loadURL(resolveHtmlPath('/') + '#' + hash);

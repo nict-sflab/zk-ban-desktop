@@ -28,9 +28,11 @@ export default function SignPage() {
 
           <br />
           <HStack justify='center' gap="6">
-              <Button onClick={ async () => { sign(1, window); }}>Taro</Button>
-              <Button onClick={ async () => { sign(2, window); }}>Jiro</Button>
-              {/* <Button onClick={ async () => { sign(3, window); }}>Saburo</Button> */}
+              <Button onClick={ async () => { sign(0, window); }}>Taro</Button>
+              <Button onClick={ async () => { sign(1, window); }}>Jiro</Button>
+              <Button onClick={ async () => { sign(2, window); }}>Saburo</Button>
+              <Button onClick={ async () => { sign(3, window); }}>Siro</Button>
+              <Button onClick={ async () => { sign(4, window); }}>Goro</Button>
           </HStack>
       </div>
     )

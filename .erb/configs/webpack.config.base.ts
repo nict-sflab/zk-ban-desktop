@@ -2,10 +2,27 @@
  * Base webpack config used across other specific configs
  */
 
+import fs from 'fs';
 import webpack from 'webpack';
 import TsconfigPathsPlugins from 'tsconfig-paths-webpack-plugin';
 import webpackPaths from './webpack.paths';
-import { dependencies as externals } from '../../release/app/package.json';
+
+const getExternalDependencies = (): Record<string, string> => {
+  if (!fs.existsSync(webpackPaths.appPackagePath)) {
+    return {};
+  }
+
+  try {
+    const packageJson = JSON.parse(
+      fs.readFileSync(webpackPaths.appPackagePath, 'utf8'),
+    );
+    return packageJson.dependencies ?? {};
+  } catch {
+    return {};
+  }
+};
+
+const externals = getExternalDependencies();
 
 const configuration: webpack.Configuration = {
   externals: [...Object.keys(externals || {})],

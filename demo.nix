@@ -10,7 +10,7 @@ pkgs.mkShell {
     cd ..
     sleep $ZK_BAN_SLEEP; 
     google-chrome-stable $ZK_BAN_VERIFIER & 
-    $ZK_BAN_SIGNER join --token $ZK_BAN_TOKEN
-    $ZK_BAN_SIGNER daemon
+    $ZK_BAN_SIGNER join --token $ZK_BAN_TOKEN --keyPath $ZK_BAN_KEYPATH 
+    $ZK_BAN_SIGNER daemon --keyPath $ZK_BAN_KEYPATH 
   '';
 }

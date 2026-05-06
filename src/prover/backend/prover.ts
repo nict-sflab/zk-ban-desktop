@@ -5,6 +5,7 @@ import axios from "axios";
 const env = {
   URL: process.env.ZK_BAN_URL || "",
   SIGNER : process.env.ZK_BAN_SIGNER || "",
+  KEYPATH : process.env.ZK_BAN_KEYPATH || "",
   VERIFIER : process.env.ZK_BAN_VERIFIER_URL || "",
 };
 
@@ -69,6 +70,7 @@ export const prover = {
       "--message", searchParams.get("message") || "hello",
       "--count", option,
       "--url", env.VERIFIER,
+      "--keyPath", env.KEYPATH,
     ]
 
     console.log('signer command', env.SIGNER, args)
